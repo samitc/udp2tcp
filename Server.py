@@ -29,7 +29,7 @@ class Server:
         self.setOnClientConnect(None)
 
     def startServer(self):
-        udpIp = "127.0.0.1"
+        udpIp = "0.0.0.0"
         self.udpSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.udpSock.bind((udpIp, self.udpPort))
         data, addr = self.udpSock.recvfrom(self.bufferSize)
@@ -66,7 +66,7 @@ class Server:
                 self.tcpClients.remove(client)
 
     def createServerSocket(self):
-        tcpIp = "127.0.0.1"
+        tcpIp = "0.0.0.0"
         self.tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.tcpServer.bind((tcpIp, self.tcpPort))
         if self.useTimeout:
