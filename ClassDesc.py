@@ -79,7 +79,17 @@ class ClassDesc:
 
     def createInstance(self, unpackData):
         instance = dict()
-        for member, val in zip(self.members, unpackData):
+        i = 0
+        for member in self.members:
+            size = member[1][1]
             name = member[0]
-            instance[name] = val
+            if size > 1:
+                array = []
+                for j in range(size):
+                    array.append(unpackData[i+j])
+                instance[name] = array
+                i += size
+            else:
+                instance[name] = unpackData[i]
+                i += 1
         return instance
